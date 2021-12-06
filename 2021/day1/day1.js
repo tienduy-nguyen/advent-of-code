@@ -1,15 +1,7 @@
-const { readFileSync } = require('fs')
-
-const readData = (fileName)=>{
-    try {
-        return readFileSync(fileName,  'utf8').toString().split("\n").map(i => Number(i))
-    } catch (err) {
-        console.error(err)
-    }
-}
+const { readData } = require('../utils/utils.js')
 
 const resolve_part1 = (inputFile)=>{
-    const data = readData(inputFile)
+    const data = readData(inputFile, true)
     //const list = data.reduce((result, cur, index, arr) => cur > arr[index-1] ? [...result, cur] : result, [] )
     let count = 0
     for (let i = 0; i < data.length; i++) {
@@ -20,7 +12,7 @@ const resolve_part1 = (inputFile)=>{
 
 // a + b + c < b + c + d can be canceled down to a < d.
 const resolve_part2 = (inputFile)=>{
-    const data = readData(inputFile)
+    const data = readData(inputFile, true)
     let count = 0
     for (let i = 3; i < data.length; i++) {
         if(data[i] > data[i-3]) ++count
